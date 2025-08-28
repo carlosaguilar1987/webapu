@@ -1,0 +1,278 @@
+/*
+  ==========================================================
+  Estilos base para landing responsiva con mapa Leaflet
+  – Todos los bloques están comentados en español
+  – Sustituye assets/hero.jpg por tu imagen para replicar tu "foto"
+  ==========================================================
+*/
+
+/* Variables de tema */
+:root {
+  --color-bg: #0f172a; /* azul grisáceo oscuro */
+  --color-surface: #111827; /* superficie */
+  --color-primary: #22c55e; /* verde */
+  --color-primary-contrast: #052e12; /* verde oscuro para hover */
+  --color-muted: #9ca3af; /* texto secundario */
+  --color-text: #e5e7eb; /* texto principal */
+  --color-border: #1f2937;
+
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 10px 25px rgba(0,0,0,.25);
+
+  --container: 1100px; /* ancho máx. del contenido */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+}
+
+/* Reset y base tipográfica */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+  color: var(--color-text);
+  background: radial-gradient(1000px 500px at 10% -10%, #1f2937 0%, rgba(17,24,39,0) 60%),
+              var(--color-bg);
+}
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+.section {
+  padding: var(--space-8) 0;
+}
+
+.section-title {
+  margin: 0 0 var(--space-6);
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+}
+
+/* Enlace de salto para accesibilidad (vis. solo al enfocar) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+.skip-link:focus {
+  left: var(--space-5);
+  top: var(--space-5);
+  background: var(--color-primary);
+  color: #0b0f17;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+}
+
+.brand {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.site-nav .nav-list {
+  display: flex;
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+.site-nav a:hover {
+  color: #fff;
+}
+
+/* Hero con imagen de fondo */
+.hero {
+  position: relative;
+  /*
+    SUSTITUYE esta ruta por tu propia imagen para replicar el diseño de tu foto.
+    Por ejemplo: assets/mi-portada.jpg
+  */
+  --hero-image: url('assets/hero.jpg');
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.65)), var(--hero-image);
+  background-size: cover;
+  background-position: center;
+  min-height: 64vh;
+  display: grid;
+  place-items: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-inner {
+  text-align: center;
+  padding: var(--space-8) 0;
+}
+
+.hero-title {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(2rem, 4vw + 1rem, 3rem);
+}
+
+.hero-subtitle {
+  margin: 0 auto var(--space-6);
+  max-width: 60ch;
+  color: var(--color-muted);
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 42px;
+  padding: 0 var(--space-5);
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  color: #fff;
+  transition: transform .08s ease, background .2s ease, color .2s ease;
+  will-change: transform;
+}
+.button:hover { transform: translateY(-1px); }
+.button:active { transform: translateY(0); }
+.button.primary { background: var(--color-primary); color: #0b0f17; }
+.button.primary:hover { background: #1ed066; }
+.button.secondary { background: transparent; }
+
+/* Grid de características */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 700px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .features-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.feature-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow);
+}
+.feature-card h3 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.25rem;
+}
+.feature-card p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* Sección del mapa */
+.map-section .map {
+  /*
+    Leaflet necesita una altura explícita. Ajusta según tu diseño.
+  */
+  height: 320px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+@media (min-width: 900px) {
+  .map-section .map { height: 480px; }
+}
+
+/* Ajustes generales del formulario */
+.contact-form {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 640px;
+}
+.form-row {
+  display: grid;
+  gap: var(--space-2);
+}
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.form-actions { margin-top: var(--space-2); }
+
+/* Footer */
+.site-footer {
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
+  background: rgba(17, 24, 39, 0.6);
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-6) 0;
+}
+.footer-link { color: var(--color-muted); text-decoration: none; }
+.footer-link:hover { color: #fff; }
+
+/* Leaflet: asegura que el contenedor ocupe ancho completo */
+.leaflet-container { width: 100%; height: 100%; }
+
+/* Texto auxiliar bajo el mapa */
+.map-help {
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+}
+
