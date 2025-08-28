@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Hace que el layout sea responsivo en móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Landing Responsiva con Mapa</title>
+    <meta name="description" content="Plantilla base responsiva con Leaflet y código comentado" />
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="./styles.css" />
+
+    <!-- Leaflet (mapas) - CSS desde CDN -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <!-- Carga el JS propio al final con defer para no bloquear el render -->
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <!-- Enlace para accesibilidad: saltar al contenido principal -->
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <!-- CABECERA / NAV -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <!-- Logo / Marca -->
+        <a class="brand" href="#" aria-label="Inicio">MiMarca</a>
+
+        <!-- Navegación principal -->
+        <nav class="site-nav" aria-label="Navegación principal">
+          <ul class="nav-list">
+            <li><a href="#features">Características</a></li>
+            <li><a href="#mapa">Mapa</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO: sección destacada con imagen de fondo -->
+    <!-- Reemplaza assets/hero.jpg por tu foto para "copiar" tu diseño -->
+    <section class="hero" role="banner" aria-label="Sección destacada">
+      <div class="container hero-inner">
+        <h1 class="hero-title">Título atractivo aquí</h1>
+        <p class="hero-subtitle">
+          Subtítulo breve que refuerza el mensaje principal y el valor.
+        </p>
+        <div class="hero-cta">
+          <a class="button primary" href="#mapa">Ver ubicación</a>
+          <a class="button secondary" href="#contacto">Contáctanos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="contenido" class="site-main" tabindex="-1">
+      <!-- Bloque de características en grid responsivo -->
+      <section id="features" class="section">
+        <div class="container">
+          <h2 class="section-title">Características</h2>
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3>Rápido</h3>
+              <p>
+                Layout responsivo optimizado para móviles y escritorio.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Modern0</h3>
+              <p>
+                Construido con mejores prácticas de HTML, CSS y JavaScript.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Mapa integrado</h3>
+              <p>
+                Incluye Leaflet y OpenStreetMap con marcador configurable.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAPA: contenedor donde Leaflet montará el mapa -->
+      <section id="mapa" class="section map-section" aria-label="Mapa de ubicación">
+        <div class="container">
+          <h2 class="section-title">Dónde estamos</h2>
+          <!-- Importante: este div necesita un alto en CSS -->
+          <div id="map" class="map" role="region" aria-label="Mapa interactivo"></div>
+          <p class="map-help">
+            Consejo: pellizca o haz zoom para explorar. Si lo prefieres, activa la geolocalización en tu navegador para centrar el mapa.
+          </p>
+        </div>
+      </section>
+
+      <!-- CONTACTO: formulario de ejemplo (sin backend) -->
+      <section id="contacto" class="section">
+        <div class="container">
+          <h2 class="section-title">Contacto</h2>
+          <form class="contact-form" action="#" method="post" aria-label="Formulario de contacto">
+            <div class="form-row">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required />
+            </div>
+            <div class="form-row">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="button primary">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> MiMarca. Todos los derechos reservados.</p>
+        <a href="#" class="footer-link">Política de privacidad</a>
+      </div>
+    </footer>
+
+    <!-- Leaflet (mapas) - JS desde CDN al final del body para mejor rendimiento -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  </body>
+  </html>
+
